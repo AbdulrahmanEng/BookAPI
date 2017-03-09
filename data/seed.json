@@ -1,0 +1,17 @@
+[{
+    "author": ["Ken Beck"],
+    "genre": "Computers",
+    "title": "Smalltalk Best Practice Patterns"
+}, {
+    "author": "Steve McConnell",
+    "genre": "Computers",
+    "title": "Code Complete: A Practical Handbook of Software Construction"
+}, {
+    "author": "Robert C. Martin",
+    "genre": "Computers",
+    "title": "Clean Code: A Handbook of Agile Software Craftsmanship"
+}, {
+    "author": "William Knowlton Zinsser",
+    "genre": "Writing",
+    "title": "On writing well: an informal guide to writing nonfiction"
+}]

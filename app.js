@@ -1,20 +1,46 @@
 'use strict';
-// Express dependancy
+
+// Dependancies.
 const express = require('express');
-// Express instance
+const mongoose = require('mongoose');
+
+// Express instance.
 const app = express();
 
-// Port
+// Host.
+const host = process.env.IP || '127.0.0.1';
+
+// Port.
 const port = process.env.PORT || 3000;
 
+// Sets Mongoose connection. 
+const mongoDB = `mongodb://${host}/bookAPI`;
+mongoose.connect(mongoDB);
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+// Book model.
+const Book = require('./models/bookModel');
+
+// Router.
 const bookRouter = express.Router();
 
 bookRouter.route('/books')
 .get((req, res) => {
-    let responseJSON = {books:['Book 1','Book 2']};
-    res.json(responseJSON);
+	// Assigns query object
+	let query = req.query;
+    // Performs a search of the bookAPI db
+    Book.find(query, function(err, books) {
+        // Returns either an error or the books in JSON.
+        if(err){
+            res.status(500).send(err);
+        } else {
+            res.json(books);
+        }
+    });
 });
-
+// Assigns bookRouter to /api endpoint.
 app.use('/api', bookRouter);
 
 app.get('/',(req, res)=> res.end('Index'));

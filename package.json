@@ -11,6 +11,7 @@
   "author": "Abdulrahman <bydeinon@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "mongoose": "^4.8.6"
   }
 }
