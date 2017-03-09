@@ -28,8 +28,14 @@ const bookRouter = express.Router();
 
 bookRouter.route('/books')
 .get((req, res) => {
-	// Assigns query object
-	let query = req.query;
+    const query = {};
+	if(req.query.title){
+	    query.genre = req.query.genre;
+	} else if (req.query.genre) {
+	    query.genre = req.query.genre;
+	} else if (req.query.author){
+	    query.author = req.query.author;
+	}
     // Performs a search of the bookAPI db
     Book.find(query, function(err, books) {
         // Returns either an error or the books in JSON.
