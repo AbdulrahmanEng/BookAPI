@@ -25,7 +25,7 @@ const Book = require('./models/bookModel');
 
 // Router.
 const bookRouter = express.Router();
-
+// Gets all books and filters by query string.
 bookRouter.route('/books')
 .get((req, res) => {
     const query = {};
@@ -46,6 +46,21 @@ bookRouter.route('/books')
         }
     });
 });
+
+// Gets book by id.
+bookRouter.route('/books/:bookID')
+.get((req, res) => {
+    // Performs a search of the bookAPI db
+    Book.findById(req.params.bookID, function(err, book) {
+        // Returns either an error or a book in JSON.
+        if(err){
+            res.status(500).send(err);
+        } else {
+            res.json(book);
+        }
+    });
+});
+
 // Assigns bookRouter to /api endpoint.
 app.use('/api', bookRouter);
 
