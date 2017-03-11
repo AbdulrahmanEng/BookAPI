@@ -34,7 +34,7 @@ app.use(bodyParser.json());
 let bookRouter = require('./routes/bookRoutes')(Book);
 
 // Assigns bookRouter to /api endpoint
-app.use('/api', bookRouter);
+app.use('/api/books', bookRouter);
 
 // Handles GET requests to index
 app.get('/', (req, res) => res.end('Home of the BookAPI'));
