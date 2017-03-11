@@ -7,36 +7,14 @@ let routes = function(Book) {
 
   // Router
   const bookRouter = express.Router(Book);
+
+  // Controller
+  const bookController = require('../controllers/bookController')(Book);
+
   // Gets all books and filters by query string.
   bookRouter.route('/')
-    .get((req, res) => {
-      let query = {};
-      if (req.query.title) {
-        query.title = req.query.title;
-      }
-      else if (req.query.genre) {
-        query.genre = req.query.genre;
-      }
-      else if (req.query.author) {
-        query.author = req.query.author;
-      }
-      // Performs a search of the bookAPI db
-      Book.find(query, function(err, books) {
-        // Returns either an error or the books in JSON.
-        if (err) {
-          res.status(500).send(err);
-        }
-        else {
-          res.json(books);
-        }
-      });
-    })
-    .post((req, res) => {
-      let book = new Book(req.body);
-      // Book is saved to database
-      book.save();
-      res.status(201).send(book);
-    });
+    .get(bookController.get)
+    .post(bookController.post);
 
   // bookRouter middleware for book id
   bookRouter.use('/:bookID', (req, res, next) => {
@@ -51,7 +29,9 @@ let routes = function(Book) {
         next();
       }
       else {
-        res.status(404).json({error:'Book does not exist.'});
+        res.status(404).json({
+          error: 'Book does not exist.'
+        });
       }
     });
   });
@@ -97,11 +77,12 @@ let routes = function(Book) {
         }
       });
     })
-    .delete((req, res)=> {
-      req.book.remove((err)=>{
-        if(err){
+    .delete((req, res) => {
+      req.book.remove((err) => {
+        if (err) {
           res.status(500).send(err);
-        } else {
+        }
+        else {
           res.status(204).end();
         }
       });
