@@ -1,15 +1,50 @@
 # BookAPI
+Demonstration Node.js API that sends, stores, updates and deletes books from a mongoDB server.
 
-## Instructions.
+## Installation.
 
-1. Install Node and npm.
-2. Set up mongoDB on your machine.
-3. Add seed data which is provided in the /data directory. Import the data to MongoDB with the following command:
+- Install Node and npm.
+- Install and configure mongoDB on the server.
+- Add seed data which is provided in the /data directory. Import the data to MongoDB with mongoimport:
 ```
 mongoimport -db bookAPI --collection books --file data/seed.json --jsonArray
 ```
-4. Run the server.
+- Run the server.
 ```
 node app.js
 ```
-5. Go to http://127.0.0.1:3000/api/books/.
+
+## Schema
+BookAPI is accessed from the root endpoint http://127.0.0.1:3000/api/.
+
+### Activity
+
+#### List books
+```
+GET /books
+```
+***Example***:
+```curl -H "Accept:application/json" http://0.0.0.0:8080/api/books/```
+
+##### Parameters
+
+|Name|Type|Description|
+|--|--|--|
+|title|string|Return books that match a title|
+|author|string|Return books that match an author|
+|genre|string|Return books that match a genre|
+|id|string|Return books that match an id|
+
+#### Add a new book
+```
+POST /books/
+```
+***Example***:
+```curl -i -X POST -H "Content-Type:application/json" https://emerald-forest-devy01000001.c9users.io/api/books/ -d '{"title":"New Book", "author":"Me","genre":"REST"}'```
+
+#### Update a book by id
+```
+PUT /books/:bookID
+```
+***Example***:
+```curl -v -H "Content-Type:application/json" -X PUT http://0.0.0.0:8080/api/books/58c445c04aeed82c2e7d10ac -d '{"title": "Updated Book","author": "Me","genre": "Computers", "read": false}'```
