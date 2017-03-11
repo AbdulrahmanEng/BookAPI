@@ -3,6 +3,7 @@
 // Dependancies.
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 // Express instance.
 const app = express();
@@ -20,8 +21,12 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 
-// Book model.
+// Book model imported.
 const Book = require('./models/bookModel');
+
+// Middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 // Router.
 const bookRouter = express.Router();
@@ -45,6 +50,11 @@ bookRouter.route('/books')
             res.json(books);
         }
     });
+})
+.post((req,res) => {
+    let book = new Book(req.body);
+    book.save();
+    res.status(201).send(book);
 });
 
 // Gets book by id.
@@ -64,6 +74,6 @@ bookRouter.route('/books/:bookID')
 // Assigns bookRouter to /api endpoint.
 app.use('/api', bookRouter);
 
-app.get('/',(req, res)=> res.end('Index'));
+app.get('/',(req, res)=> res.end('Home of the BookAPI'));
 
 app.listen(port, () => console.log(`Listening on ${port}`));

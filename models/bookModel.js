@@ -18,5 +18,5 @@ const bookModel = new Schema({
         default: false
     }
 });
-
+// The collection becomes 'books'.
 module.exports = mongoose.model('Book', bookModel);
