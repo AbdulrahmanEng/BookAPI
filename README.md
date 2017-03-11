@@ -48,3 +48,10 @@ PUT /books/:bookID
 ```
 ***Example***:
 ```curl -v -H "Content-Type:application/json" -X PUT http://0.0.0.0:8080/api/books/58c445c04aeed82c2e7d10ac -d '{"title": "Updated Book","author": "Me","genre": "Computers", "read": false}'```
+
+#### Patch a book by id
+```
+PATCH /books/:bookID
+```
+***Example***:
+```curl -v -H "Content-Type:application/json" -X PATCH http://0.0.0.0:8080/api/books/58c444e94aeed82c2e7d10aa -d '{"read": true}'```
