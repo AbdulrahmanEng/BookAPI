@@ -36,22 +36,39 @@ GET /books
 |id|string|Return books that match an id|
 
 #### Add a new book
+
 ```
 POST /books/
 ```
+
 ***Example***:
+
 ```curl -i -X POST -H "Content-Type:application/json" https://emerald-forest-devy01000001.c9users.io/api/books/ -d '{"title":"New Book", "author":"Me","genre":"REST"}'```
 
-#### Update a book by id
+#### Update existing book
+
 ```
 PUT /books/:bookID
 ```
 ***Example***:
+
 ```curl -v -H "Content-Type:application/json" -X PUT http://0.0.0.0:8080/api/books/58c445c04aeed82c2e7d10ac -d '{"title": "Updated Book","author": "Me","genre": "Computers", "read": false}'```
 
-#### Patch a book by id
+#### Update specific part of a book
+
 ```
 PATCH /books/:bookID
 ```
 ***Example***:
+
 ```curl -v -H "Content-Type:application/json" -X PATCH http://0.0.0.0:8080/api/books/58c444e94aeed82c2e7d10aa -d '{"read": true}'```
+
+#### Delete a book by id
+
+```
+DELETE /books/:bookID
+```
+
+***Example***:
+
+```curl -v -H "Content-Type:application/json" -X DELETE http://0.0.0.0:8080/api/books/58c445b14aeed82c2e7d10ab```

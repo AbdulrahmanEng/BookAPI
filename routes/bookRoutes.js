@@ -51,7 +51,7 @@ let routes = function(Book) {
         next();
       }
       else {
-        res.status(404).send('Book does not exist.');
+        res.status(404).json({error:'Book does not exist.'});
       }
     });
   });
@@ -94,6 +94,15 @@ let routes = function(Book) {
         }
         else {
           res.json(req.book);
+        }
+      });
+    })
+    .delete((req, res)=> {
+      req.book.remove((err)=>{
+        if(err){
+          res.status(500).send(err);
+        } else {
+          res.status(204).end();
         }
       });
     });
