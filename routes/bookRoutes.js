@@ -60,7 +60,6 @@ let routes = function(Book) {
           res.json(req.book);
         }
       });
-      res.json(req.book);
     })
     .patch((req, res) => {
       // Deletes id in request body if it exists
