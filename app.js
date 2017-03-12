@@ -49,3 +49,5 @@ app.get('/', (req, res) => res.end('Home of the BookAPI'));
 
 // Opens the port
 app.listen(port, () => console.log(`Listening on ${port}`));
+
+module.exports = app;

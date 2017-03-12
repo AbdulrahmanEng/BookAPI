@@ -43,7 +43,7 @@ POST /books/
 
 ***Example***:
 
-```curl -i -X POST -H "Content-Type:application/json" https://emerald-forest-devy01000001.c9users.io/api/books/ -d '{"title":"New Book", "author":"Me","genre":"REST"}'```
+```curl -i -X POST -H "Content-Type:application/json" http://0.0.0.0:8080/api/books/ -d '{"title":"New Book", "author":"Me","genre":"REST"}'```
 
 #### Update existing book
 
