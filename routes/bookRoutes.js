@@ -39,7 +39,11 @@ let routes = function(Book) {
   // Gets book by id
   bookRouter.route('/:bookID')
     .get((req, res) => {
-      res.json(req.book);
+      let returnBook = req.book.toJSON();
+      returnBook.links = {};
+      let newLink = `http://${req.headers.host}/api/books/?genre=${returnBook.genre}`;
+      returnBook.links.filterByGenre = newLink.replace(' ', '%20');
+      res.json(returnBook);
     })
     .put((req, res) => {
       // Property assignment for edited book
