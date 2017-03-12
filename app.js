@@ -15,17 +15,25 @@ const host = process.env.IP || '127.0.0.1';
 const port = process.env.PORT || 3000;
 
 // Sets Mongoose connection
-const mongoDB = `mongodb://${host}/bookAPI`;
-mongoose.connect(mongoDB);
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+if (process.env.NODE_ENV === 'test') {
+    const uri = `mongodb://${host}/bookAPI-test`;
+    mongoose.connect(uri);
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+}
+else {
+    const uri = `mongodb://${host}/bookAPI`;
+    mongoose.connect(uri);
+    const db = mongoose.connection;
+    db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+}
 
 // Book model imported
 const Book = require('./models/bookModel');
 
 // Middleware
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.use(bodyParser.json());
 
