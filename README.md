@@ -72,3 +72,6 @@ DELETE /books/:bookID
 ***Example***:
 
 ```curl -v -H "Content-Type:application/json" -X DELETE http://0.0.0.0:8080/api/books/58c445b14aeed82c2e7d10ab```
+
+### Test
+```npm test```

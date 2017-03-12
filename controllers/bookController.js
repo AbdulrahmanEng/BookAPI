@@ -27,9 +27,16 @@ const bookController = (Book) => {
     // POST handler
     let post = (req, res) => {
       let book = new Book(req.body);
+
+      if(!req.body.title){
+	res.status(400);
+	res.send('Title is required');
+} else {
       // Book is saved to database
       book.save();
-      res.status(201).send(book);
+      res.status(201);
+      res.send(book);
+}
     };
     // Returns functions to bookRouter route
     return {
