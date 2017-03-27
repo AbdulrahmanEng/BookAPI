@@ -7,7 +7,7 @@ Demonstration Node.js API that sends, stores, updates and deletes books from a m
 - Install and configure mongoDB on the server.
 - Add seed data which is provided in the /data directory. Import the data to MongoDB with mongoimport:
 ```
-mongoimport -db bookAPI --collection books --file data/seed.json --jsonArray
+mongoimport -db bookAPI --collection books --file seed-data/seed.json --jsonArray
 ```
 - Run the server.
 ```
